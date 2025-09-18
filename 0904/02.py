@@ -26,7 +26,7 @@ for num in range(0,10):	# 폴더 하나씩 순회
 		img_path = f'./images/training/{num}/{numbers}' # 이미지 경로 저장
 		print(f"load : {img_path}") # 이미지 경로 출력
 		img = Image.open(img_path) # img 객체 저장
-		imgarr = np.array(img) / 255.0
+		imgarr = np.array(img) / 255.0	# 이미지 전처리(계산에 용이하도록 숫자의 범위를 줄임)
 		x_train_datas.append(np.reshape(imgarr, newshape=(784,1))) # img객체를 numpy 배열로 변환하여 x_train_datas에 저장
 		y_tmp = np.zeros(shape=(10))
 		y_tmp[num] = 1
