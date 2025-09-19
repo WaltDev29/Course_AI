@@ -5,6 +5,7 @@ import numpy as np
 import tensorflow as tf
 from tensorflow import keras
 from keras import layers, Model, Input
+import random
 
 
 # traning data 생성
@@ -87,6 +88,22 @@ plt.show()
 
 test_liss, test_acc = model.evaluate(x_test_datas, y_test_datas)
 print("테스트 정확도 :", test_acc)
+
+result = model.predict(x_test_datas)
+diff = []
+predictnum = []
+
+for i in range(len(result)):
+    if np.argmax(result[i]) != np.argmax(y_test_datas[i]):
+        img = np.reshape(x_test_datas[i], newshape=(28,28))*255
+        img = Image.fromarray(img)
+        diff.append(img)
+        predictnum.append(np.argmax(result[i]))
+        
+for i in range(5):
+    pickidx = random.choice(range(0,len(diff)))
+    print(predictnum[pickidx])
+    diff[pickidx].show()
 
 '''
 num = 3
